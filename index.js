@@ -16,15 +16,25 @@ io.on('connection', (socket) => {
 
     console.log('made socket connection', socket.id);
 
+    socket.on('disconnect',function(data){
+        console.log('disconnected');
+    });
+
     // Handle chat event
     socket.on('chat', function(data){
         // console.log(data);
         io.sockets.emit('chat', data);
     });
 
-    // Handle typing event
-    socket.on('typing', function(data){
-        socket.broadcast.emit('typing', data);
+
+    socket.on('chat2', function(data){
+        // console.log(data);
+        io.sockets.emit('chat2', data);
+    });
+
+
+    socket.on('typing',function(data){
+      socket.broadcast.emit('typing',data)
     });
 
 });
